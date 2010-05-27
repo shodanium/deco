@@ -154,12 +154,12 @@ int strbcmp (char *s, char *b)
 
 void outerr (char *s, ...)
 {
-	char buf [100];
+	char buf [1024];
 	register char *p;
 	va_list ap;
 
 	va_start (ap, s);
-	vsprintf (buf, s, ap);
+	vsnprintf (buf, sizeof(buf), s, ap);
 	va_end (ap);
 	for (p=buf; *p; ++p)
 		if (*p == '\033')

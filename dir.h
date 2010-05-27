@@ -14,7 +14,7 @@
 #ifdef SHORTNAMES
 #   define NAMESZ 15
 #else
-#   define NAMESZ 63
+#   define NAMESZ 512
 #endif
 
 struct file {

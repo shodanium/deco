@@ -206,7 +206,7 @@ static void readex ()
 static void initex ()
 {
 	register fd, n;
-	char fname [80];
+	char fname [NAMESZ];
 	char buf [BUFSZ];
 
 	/* look for ~/.deco */
@@ -361,7 +361,7 @@ static void printudm ()
 static int openmenu (char *filename)
 {
 	register fd;
-	char fname [80];
+	char fname [NAMESZ];
 
 	if (filename)
 		return (open (filename, 0));
@@ -533,7 +533,7 @@ findmenu:
 
 void usermenu ()                /* user defined menu */
 {
-	char scale [128], filename [80];
+	char scale [128], filename [NAMESZ];
 	register char *p;
 
 	p = 0;
@@ -565,7 +565,7 @@ void readinitfile ()
 	register fd, n;
 	register char *line;
 	struct dir *d;
-	char fname [80];
+	char fname [NAMESZ];
 	char buf [BUFSZ];
 
 	/* look for ~/.decoini */
@@ -762,7 +762,7 @@ initdir:
 void writeinitfile ()
 {
 	register fd;
-	char fname [80];
+	char fname [NAMESZ];
 	char buf [BUFSZ];
 
 	/* look for ~/.decoini */

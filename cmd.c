@@ -254,14 +254,12 @@ void seteditname ()
 
 void view ()
 {
-	char buf [80];
+	char buf [NAMESZ];
 	register char *name = cur->cat[cur->curfile].name;
 	register d;
 
 	if (userview) {
-		strcpy (buf, viewname);
-		strcat (buf, " ");
-		strcat (buf, name);
+		snprintf (buf, sizeof(buf), "%s %s", viewname, name);
 		VRestore ();
 		syscmd (buf);
 		VReopen ();
@@ -280,15 +278,13 @@ void view ()
 
 void viewinfo ()
 {
-	char buf [80];
-	char name [512];
+	char buf [NAMESZ];
+	char name [NAMESZ];
 	register d;
 
-	sprintf (name, "%s/.info/%s", cur->cwd, cur->cat[cur->curfile].name);
+	sprintf (name, sizeof(name), "%s/.info/%s", cur->cwd, cur->cat[cur->curfile].name);
 	if (userview) {
-		strcpy (buf, viewname);
-		strcat (buf, " ");
-		strcat (buf, name);
+		snprintf (buf, sizeof(buf), "%s %s", viewname, name);
 		VRestore ();
 		syscmd (buf);
 		VReopen ();
@@ -309,7 +305,7 @@ static void editfnam (char *name)
 {
 	register d;
 	register char *p;
-	char buf [80];
+	char buf [NAMESZ];
 	struct stat st;
 
 	if (stat (name, &st) >= 0) {
@@ -326,9 +322,7 @@ static void editfnam (char *name)
 		close (d);
 	}
 	if (useredit) {
-		strcpy (buf, editname);
-		strcat (buf, " ");
-		strcat (buf, name);
+		snprintf (buf, sizeof(buf), "%s %s", editname, name);
 		VRestore ();
 		syscmd (buf);
 		VReopen ();
@@ -351,14 +345,14 @@ static void editfnam (char *name)
 void edit ()
 {
 	register char *name = cur->cat[cur->curfile].name;
-	char namebuf [50];
+	char namebuf [NAMESZ];
 
 	if (strcmp (name, ".") == 0) {
 		name = getstring (40, 0, " Edit ",
 			"Enter name of file to edit");
 		if (! name)
 			return;
-		strcpy (namebuf, name);
+		strncpy (namebuf, sizeof(namebuf), name);
 		editfnam (namebuf);
 		return;
 	}
@@ -367,7 +361,7 @@ void edit ()
 
 void editinfo ()
 {
-	char name [512];
+	char name [NAMESZ];
 
 	sprintf (name, "%s/.info/%s", cur->cwd, cur->cat[cur->curfile].name);
 	editfnam (name);
@@ -375,7 +369,7 @@ void editinfo ()
 
 void menuedit ()
 {
-	char buf [80];
+	char buf [NAMESZ];
 
 	switch (getchoice (0, " Menu Edit ", "Select which menu to edit:",
 	    0, " Current menu ", " Home menu ", 0)) {
@@ -383,8 +377,7 @@ void menuedit ()
 		editfnam (".menu");
 		break;
 	case 1:
-		strcpy (buf, home);
-		strcat (buf, "/.menu");
+		snprintf (buf, sizeof(buf), "%s/.menu", home);
 		editfnam (buf);
 		break;
 	}
@@ -392,10 +385,8 @@ void menuedit ()
 
 void extedit ()
 {
-	char buf [80];
-
-	strcpy (buf, home);
-	strcat (buf, "/.deco");
+	char buf [NAMESZ];
+	snprintf (buf, sizeof(buf), "%s/.deco", home);
 	editfnam (buf);
 }
 
@@ -471,7 +462,7 @@ int tagged ()
 
 void copy ()
 {
-	char buf [80];
+	char buf [NAMESZ];
 	char *name;
 	register struct file *p;
 	register c;
@@ -562,7 +553,7 @@ void copy ()
 
 void makelink ()
 {
-	char buf [80];
+	char buf [NAMESZ];
 	char *name;
 	register struct file *p;
 	register c;
@@ -636,7 +627,7 @@ void makelink ()
 #ifdef S_IFLNK
 void makeslink ()
 {
-	char buf [80];
+	char buf [NAMESZ];
 	char *name;
 	register struct file *p;
 	register c;
@@ -840,7 +831,7 @@ void makedir ()
 
 void delete ()
 {
-	char buf [80];
+	char buf [NAMESZ];
 	register struct file *p;
 	register c;
 

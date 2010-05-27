@@ -889,6 +889,14 @@ void VPutString (char *str)
 		VPutChar (*str++);
 }
 
+void VPutStringLimited (char *str, int max)
+{
+	while (*str && --max>=0)
+		VPutChar (*str++);
+	if (*str)
+		VPutString ("...");
+}
+
 static char *makecolor (int c, int b)
 {
 	register char *p = colorp;

@@ -18,7 +18,7 @@
 
 #define BASECOL(c)      (widewin ? 0 : (c)->basecol)
 
-#define CMDLEN          512             /* length of command string */
+#define CMDLEN          2048            /* length of command string */
 
 struct dir;
 struct file;

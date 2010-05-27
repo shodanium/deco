@@ -210,9 +210,7 @@ static void initex ()
 	char buf [BUFSZ];
 
 	/* look for ~/.deco */
-	strcpy (fname, home);
-	strcat (fname, "/");
-	strcat (fname, EXFILE);
+	snprintf (fname, sizeof(fname), "%s/%s", home, EXFILE);
 	fd = open (fname, 0);
 	if (fd < 0) {
 		/* look for /usr/local/lib/deco/profile */
@@ -369,9 +367,7 @@ static int openmenu (char *filename)
 	fd = open (UMFILE, 0);
 	if (fd < 0) {
 		/* look for ~/.menu */
-		strcpy (fname, home);
-		strcat (fname, "/");
-		strcat (fname, UMFILE);
+		snprintf (fname, sizeof(fname), "%s/%s", home, UMFILE);
 		fd = open (fname, 0);
 		if (fd < 0) {
 			/* look for /usr/local/lib/deco/menu */
@@ -569,9 +565,7 @@ void readinitfile ()
 	char buf [BUFSZ];
 
 	/* look for ~/.decoini */
-	strcpy (fname, home);
-	strcat (fname, "/");
-	strcat (fname, INITFILE);
+	snprintf (fname, sizeof(fname), "%s/%s", home, INITFILE);
 	fd = open (fname, 0);
 	if (fd < 0) {
 		/* look for /usr/local/lib/deco/initfile */
@@ -766,9 +760,7 @@ void writeinitfile ()
 	char buf [BUFSZ];
 
 	/* look for ~/.decoini */
-	strcpy (fname, home);
-	strcat (fname, "/");
-	strcat (fname, INITFILE);
+	snprintf (fname, sizeof(fname), "%s/%s", home, INITFILE);
 	fd = creat (fname, 0600);
 	if (fd < 0) {
 		error ("Cannot create %s", fname);

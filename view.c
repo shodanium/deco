@@ -196,7 +196,7 @@ static void viewhead (char *filename, int line, int col)
 	VMove (0, 0);
 	for (i=80; --i>=0; VPutChar (' '));
 	VMPutString (0, 1, "File ");
-	VPutString (filename);
+	VPutStringLimited (filename, 40);
 	VPrint ("  Lines %-5d Bytes %ld", viewrec->len, viewrec->size);
 	VMove (0, 57);
 	VPrint ("Line %-5d Col %d", line+1, col);

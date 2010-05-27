@@ -44,6 +44,7 @@ void VMove (int y, int x);
 void VClearLine (void);
 void VClear (void);
 void VPutString (char *str);
+void VPutStringLimited (char *str, int max);
 void VPrint (char *fmt, ...);
 void VSetPalette (int n, int nb, int nr, int nrb, int b, int bb,
 	int br, int brb, int d, int db, int dr, int drb);

@@ -12,6 +12,7 @@
 #endif
 #include "deco.h"
 #include "env.h"
+#include "dir.h" /* for NAMESZ */
 
 #define QUANT 16
 
@@ -80,7 +81,7 @@ static char *execat (char *s1, char *s2, char *si)
 static int execvpe (char *name, char **argv, char **envstr)
 {
 	static char *pathstr;
-	char fname [128];
+	char fname [NAMESZ];
 	char *newargs [256];
 	int i;
 	register char *cp;

@@ -375,7 +375,7 @@ int setdir (struct dir *d, char *dirname)
 
 char *filesize (struct file *f)
 {
-	static char buf [9];
+	static char buf [32];
 
 	switch (f->mode & S_IFMT) {
 	case S_IFDIR:
@@ -403,7 +403,12 @@ char *filesize (struct file *f)
 		return ("  <LINK>");
 #endif
 	case S_IFREG:
-		sprintf (buf, "%8ld", (long) f->size);
+		if ( f->size >= 100*1024*1024 )
+			sprintf (buf, " %6dM", (int)(f->size/1024/1024));
+		else if ( f->size >= 1*1024*1024 )
+			sprintf (buf, " %6dK", (int)(f->size/1024));
+		else
+			sprintf (buf, " %7d", (int) f->size);
 		return (buf);
 	default:
 		return ("     ???");

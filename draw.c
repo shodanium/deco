@@ -128,7 +128,7 @@ static void draw1dir (struct dir *c)    /* redraw window */
 	else {
 		char buf [80];
 
-		sprintf (buf, " %s byte%s in %d file%s ", 
+		snprintf (buf, sizeof(buf), " %s byte%s in %d file%s ", 
 			ltoac (c->nbytes), c->nbytes==1 ? "" : "s",
 			c->nfiles, c->nfiles==1 ? "" : "s");
 		mvcaddstr (H+4, BASECOL (c) + PAGEWID/2 + 1, buf);

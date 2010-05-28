@@ -87,12 +87,12 @@ const char *extension (const char *p)
 
 char *ltoac (long l)
 {
-	char num [15];
-	static char buf [15];
+	char num [32];
+	static char buf [32];
 	register char *p, *q;
 	register n;
 
-	sprintf (num, "%ld", l);
+	snprintf (num, sizeof(num), "%ld", l);
 	for (p=num; *p; ++p);           /* find end of num */
 	q = buf + sizeof (buf) - 1;     /* set q to the end of buf */
 	*q-- = 0;

@@ -11,13 +11,16 @@ core
 	adb
 
 *.o
-	nm %f | more
+	nm %f | less
 
 *.a
-	ar tv %f | more
+	ar tv %f | less
 
 *.tar
-	tar -tvf %f | more
+	tar -tvf %f | less
 
 *.tar.gz *.tgz
-	gzip -d -c %f | tar -tvf - | more
+	gzip -d -c %f | tar -tvf - | less
+
+*.rpm
+	rpm2cpio %f | cpio -t | less

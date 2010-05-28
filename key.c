@@ -79,6 +79,8 @@ void KeyInit (struct KeyMap *map, void (*flushproc) (void))
 	register struct KeyMap *kp;
 	register struct CapTab *t;
 
+	memset (tab, 0, sizeof(tab));
+
 	km = map;
 	flush = flushproc;
 	for (t=tab, kp=km; kp->val && t<tab+NKEY-1; ++kp, ++t) {

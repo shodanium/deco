@@ -138,12 +138,6 @@ int runl (int silent, char *name, ...)
 	va_list ap;
 	int err;
 
-// shodan: ap is not necessarily (!) char**, eg on x64
-//
-//	va_start (ap, name);
-//	err = run (name, ap, execve, silent);
-//	va_end (ap);
-
 	char * args[128];
 	char * arg;
 	int nargs;
@@ -156,6 +150,7 @@ int runl (int silent, char *name, ...)
 		args[nargs++] = arg;
 	} while (arg);
 	va_end (ap);
+	args[nargs] = NULL;
 
 	err = run (name, args, execve, silent);
 	return err;

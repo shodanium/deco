@@ -257,6 +257,7 @@ void view ()
 	char buf [NAMESZ];
 	register char *name = cur->cat[cur->curfile].name;
 	register d;
+	struct stat st;
 
 	if (userview) {
 		snprintf (buf, sizeof(buf), "%s %s", viewname, name);
@@ -266,6 +267,16 @@ void view ()
 		VRedraw ();
 		setdir (cur == &left ? &right : &left, 0);
 		setdir (cur, 0);
+		return;
+	}
+	if (stat (name, &st) < 0 )
+	{
+		error ("Cannot stat %s", name);
+		return;
+	}
+	if (st.st_size > 100*1024*1024)
+	{
+		error ("File too big", name);
 		return;
 	}
 	if ((d = open (name, 0)) < 0) {

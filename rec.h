@@ -15,7 +15,7 @@ struct index {                          /* out of core line descriptor */
 
 struct map {                            /* pool cell descriptor */
 	short           busy;           /* cell busy */
-	short           index;          /* index in lindex */
+	int             index;          /* index in lindex */
 	long            time;           /* time of last access */
 };
 
@@ -37,7 +37,7 @@ typedef struct {
 	short           fd;             /* file descriptor */
 	short           bakfd;          /* bak file descriptor */
 	short           tfd;            /* temp file descriptor */
-	short           len;            /* length of file in lines */
+	int             len;            /* length of file in lines */
 	short           broken;         /* there are broken lines */
 } REC;
 
